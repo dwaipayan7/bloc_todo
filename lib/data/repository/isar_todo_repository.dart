@@ -1,5 +1,4 @@
 //Database repository
-
 import 'package:bloc_todo/data/models/isar_todo.dart';
 import 'package:bloc_todo/domain/repository/todo_repo.dart';
 import 'package:isar/isar.dart';
@@ -25,20 +24,25 @@ class IsarTodoRepo implements TodoRepo{
 
   @override
   Future<void> addTodo(Todo newTodo) {
-    // TODO: implement addTodo
-    throw UnimplementedError();
+
+    final todoIsar = TodoIsar.fromDomain(newTodo);
+
+    return db.writeTxnSync(() => db.todoIsars.put(todoIsar));
+
   }
 
   @override
   Future<void> deleteTodo(Todo todo) {
-    // TODO: implement deleteTodo
-    throw UnimplementedError();
+    final todoIsar = TodoIsar.fromDomain(todo);
+
+    return db.writeTxnSync(() => db.todoIsars.put(todoIsar));
   }
 
   @override
-  Future<void> updateTodo(Todo todo) {
-    // TODO: implement updateTodo
-    throw UnimplementedError();
+  Future<void> updateTodo(Todo todo) async{
+
+    await db.writeTxn(() => db.todoIsars.delete(todo.id));
+
   }
 
 }

@@ -21,7 +21,7 @@ class TodoIsar{
 
 //convert isar object -> pure todo object to store in my app
 
-  static TodoIsar formDomain(Todo todo){
+  static TodoIsar fromDomain(Todo todo){
     return TodoIsar()
         ..id = todo.id
         ..text = todo.text
